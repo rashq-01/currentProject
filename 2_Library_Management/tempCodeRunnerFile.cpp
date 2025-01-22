@@ -2,7 +2,6 @@
 #include<string>
 #include<vector>
 #include<fstream>
-#include<cctype>
 using namespace std;
 
 //Books class
@@ -16,7 +15,7 @@ class book{
         string genre;
         int publishedYear;
         bool isAvailable;
-        string borrowerId;
+        int borrowerId;
 
     public:
         book(string titl, string auth, string gen, int pubYear, bool avaib){
@@ -26,7 +25,6 @@ class book{
             genre = gen;
             publishedYear = pubYear;
             isAvailable = avaib;
-            borrowerId = "";
             
             //File handling
 
@@ -114,7 +112,7 @@ class book{
         bool getisAvailable(){
             return isAvailable;
         }
-        string getBorrowerId(){
+        int getBorrowerId(){
             return borrowerId;
         }
     
@@ -177,11 +175,12 @@ class library{
             string genre;
             int publishedYear;
             int avl = true;
-            cout<<"Enter the title of the book (lower Case): ";
+            cout<<"Enter the title of the book: ";
+            cin.ignore();
             getline(cin,title);
-            cout<<"Enter the author of the book (lower Case): ";
+            cout<<"Enter the author of the book: ";
             getline(cin,author);
-            cout<<"Enter the genre of the book (lower Case): ";
+            cout<<"Enter the genre of the book: ";
             getline(cin,genre);
             cout<<"Enter the published year of the book: ";
             cin>>publishedYear;
@@ -204,15 +203,15 @@ class library{
             string address;
             string phone;
             string email;
-            cout<<"Enter the roll No (lower Case): ";
+            cout<<"Enter the roll No: ";
             getline(cin,roll);
-            cout<<"Enter the name of the member (lower Case): ";
+            cout<<"Enter the name of the member: ";
             getline(cin,name);
-            cout<<"Enter the address of the member (lower Case): ";
+            cout<<"Enter the address of the member: ";
             getline(cin,address);
-            cout<<"Enter the phone number of the member (lower Case) : ";
+            cout<<"Enter the phone number of the member: ";
             getline(cin,phone);
-            cout<<"Enter the email of the member (lower Case): ";
+            cout<<"Enter the email of the member: ";
             getline(cin,email);
             members.push_back(member(roll,name, address, phone, email));
         }
@@ -241,49 +240,28 @@ class library{
             cout<<"Enter the Book ID: ";
             cin>>BOOKID;
             cin.ignore();
-            cout<<"Enter the Book Titlea (lower Case) :";
+            cout<<"Enter the Book Title";
             getline(cin,BOOKNAME);
             cout<<endl;
-            int orgLine;
-
-
-
-            fstream idFile;
-            fstream titleFile;
-            idFile.open("books/id.txt",ios::in);
-            titleFile.open("books/title.txt",ios::in);
-            int id;
-            int title;
-            
-            
-
-
-
-
-
-
-
-
-
-            // for(int i=0;i<books.size();i++){
-            //     int bookId = books[i].getId();
-            //     string bookName = books[i].getTitle();
-            //     if(bookId==BOOKID || bookName==BOOKNAME){
-            //     cout<<"Book ID: "<<books[i].getId()<<endl;
-            //     cout<<"Title: "<<books[i].getTitle()<<endl;
-            //     cout<<"Author: "<<books[i].getAuthor()<<endl;
-            //     cout<<"Genre: "<<books[i].getGenre()<<endl;
-            //     cout<<"Published Year: "<<books[i].getPublishedYear()<<endl;
-            //     int availability = books[i].getisAvailable();
-            //     if(availability){
-            //         cout<<"Book Availability: True"<<endl;
-            //     }
-            //     else{
-            //         cout<<"Book Availability: False"<<endl;
-            //     }
-            //     break;
-            //     }
-            // }
+            for(int i=0;i<books.size();i++){
+                int bookId = books[i].getId();
+                string bookName = books[i].getTitle();
+                if(bookId==BOOKID || bookName==BOOKNAME){
+                cout<<"Book ID: "<<books[i].getId()<<endl;
+                cout<<"Title: "<<books[i].getTitle()<<endl;
+                cout<<"Author: "<<books[i].getAuthor()<<endl;
+                cout<<"Genre: "<<books[i].getGenre()<<endl;
+                cout<<"Published Year: "<<books[i].getPublishedYear()<<endl;
+                int availability = books[i].getisAvailable();
+                if(availability){
+                    cout<<"Book Availability: True"<<endl;
+                }
+                else{
+                    cout<<"Book Availability: False"<<endl;
+                }
+                break;
+                }
+            }
         }
 
 
@@ -296,19 +274,7 @@ int book::idGenerator = 0;
 
 int main(){
     library l;
-    l.addBook("Pathfinder","Rajesh","Nothing",2023,true);
-    l.addBook("Math","Sanjog","Nothing",2019,true);
-    l.addBook("Physics","Suraj","Nothing",2018,true);
-    l.addBook("Chemistry","Bhaskar","Nothing",2022,true);
-    l.addBook("ITP","Kapil","Nothing",2020,true);
-    l.addBook("BCME","Raju","Nothing",2025,true);
-    l.addBook("English","Resam","Nothing",2017,true);
-    l.addBook("Nepali","Aashif","Nothing",2020,true);
-    l.addBook("Biology","Shivam","Nothing",2021,true);
-    l.addBook("Computer","Dhiraj","Nothing",2024,true);
-    l.addBook("Aptitude","Niraj","Nothing",2021,true);
-    l.addBook("Reasoning","Ganesh","Nothing",2022,true);
-    l.displayAllBooks();
+    l.addBook();
 
 
 }
