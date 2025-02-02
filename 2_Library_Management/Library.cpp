@@ -1,12 +1,10 @@
 #include<iostream>
 #include<string>
-#include<vector>
 #include<fstream>
 #include<cctype>
 using namespace std;
 
 //Books class
-
 class book{
     private:
         static int idGenerator;
@@ -98,6 +96,7 @@ class book{
 
 
         }
+             
         int getId(){
             return id;
         }
@@ -118,14 +117,10 @@ class book{
         }
         string getBorrowerId(){
             return borrowerId;
-        }
-    
+        } 
 };
 
-
-
 //Member class
-
 class member{
     private:
         string rollNo;
@@ -201,6 +196,7 @@ class member{
                 cout<<"Error in opening email.txt";
             }
         }
+          
         string getRollNo(){
             return rollNo;
         }
@@ -249,13 +245,9 @@ class library{
 
         }
 
-
         void addBook(string title, string author, string genre, int publishedYear, int avl = true){
             book(title, author, genre, publishedYear, avl);
-            
-
         }
-
 
         void addmember(){
             string roll;
@@ -296,7 +288,6 @@ class library{
             file.close();
         }
 
-
         int lineFinder(const string &filename, string info){
             ifstream file(filename);
             if(!file.is_open()){
@@ -335,6 +326,7 @@ class library{
             }
 
         }
+
         int displayAvailability(const string &filename, string info, int line){
             ifstream file(filename);
             if(!file.is_open()){
@@ -416,6 +408,7 @@ class library{
 
 
         }
+            
         void displayAllBooks(){
             cout<<endl<<endl<<endl;
             int totalNum = totalLineFinder("books/id.txt");
@@ -442,6 +435,7 @@ class library{
                 displayAvailability("books/isAvailable.txt","Availibility",i);
             }
         }
+           
         void displayAllMembers(){
             cout<<endl<<endl<<endl;
             int totalNum = totalLineFinder("members/rollNo.txt");
@@ -462,13 +456,9 @@ class library{
             }
             cout<<endl<<endl;
         }
-
-
-        
+      
 };
-
-
-
+//Global Declaration
 int book::idGenerator = 0;
 
 int main(){
@@ -561,24 +551,6 @@ int main(){
     } while (main!=3);
     
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     // l.addBook("Pride and Prejudice", "Jane Austen", "Romance", 1813, true);
     // l.addBook("The Catcher in the Rye", "J.D. Salinger", "Fiction", 1951, false);
     // l.addBook("The Hobbit", "J.R.R. Tolkien", "Fantasy", 1937, true);
@@ -594,10 +566,6 @@ int main(){
     // l.addBook("The Book Thief", "Markus Zusak", "Historical Fiction", 2005, false);
     // l.addBook("The Da Vinci Code", "Dan Brown", "Thriller", 2003, true);
     // l.addBook("Gone Girl", "Gillian Flynn", "Mystery", 2012, false);
-    // l.displayAllBooks();
-    // l.displayAllMemberDetail();
-
-
 
     // l.addmember("2478A05326", "Rajesh Pandit", "Bishrampur-03, Bara, Nepal", "980922xxxxx", "rashq122@gmail.com");
     // l.addmember("3487B01234", "Amit Sharma", "Lakeside-07, Pokhara, Nepal", "9812345678", "amit.sharma123@gmail.com");  
