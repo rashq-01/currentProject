@@ -1,24 +1,15 @@
-Rajesh
-Sanjog
-Suraj
-Bhaskar
-Kapil
-Raju
-Resam
-Aashif
-Shivam
-Dhiraj
-Niraj
-Ganesh
-Rajesh
-Sanjog
-Suraj
-Bhaskar
-Kapil
-Raju
-Resam
-Aashif
-Shivam
-Dhiraj
-Niraj
-Ganesh
+Jane Austen
+J.D. Salinger
+J.R.R. Tolkien
+Herman Melville
+Aldous Huxley
+Stephen King
+Frank Herbert
+Fyodor Dostoevsky
+Mary Shelley
+Cormac McCarthy
+Andy Weir
+J.K. Rowling
+Markus Zusak
+Dan Brown
+Gillian Flynn
