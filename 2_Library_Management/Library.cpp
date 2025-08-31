@@ -526,7 +526,6 @@ int main(){
 
         }
 
-
         else if(main == 2){
             int memb;
             do
