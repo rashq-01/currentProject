@@ -2,7 +2,7 @@ const Home = require("../models/home");
 const Favourite = require('../models/favourites');
 
 exports.getIndex = (req, res, next) => {
-  Home.find().then((registeredHomes) => {
+  Home.fetchAll().then((registeredHomes) => {
     res.render("store/index", {
       registeredHomes: registeredHomes,
       pageTitle: "airbnb Home",
@@ -14,7 +14,7 @@ exports.getIndex = (req, res, next) => {
 };
 
 exports.getHomes = (req, res, next) => {
-  Home.find().then((registeredHomes) => {
+  Home.fetchAll().then((registeredHomes) => {
     res.render("store/home-list", {
       registeredHomes: registeredHomes,
       pageTitle: "Homes List",
@@ -31,40 +31,36 @@ exports.getBookings = (req, res, next) => {
 };
 
 exports.getFavouriteList = (req, res, next) => {
-  Favourite.find()
-  .populate('houseId')
-  .then((favourites)=>{
-    const favouriteHomes = favourites.map((fav) => fav.houseId);
+  Favourite.getFavourites().then((favourites)=>{
+    favourites = favourites.map(fav => fav.houseId);
+    Home.fetchAll().then((registeredHomes) => {
+      console.log(favourites,registeredHomes);
+      const favouriteHomes = registeredHomes.filter(home => favourites.includes(home._id.toString()));
       res.render("store/favourite-list", {
         favouriteHomes: favouriteHomes,
         pageTitle: "My Favourites",
         currentPage: "favourites",
-      });
+      })
     });
+  })
 };
 
 
 exports.postAddToFavourite = (req,res,next)=>{
   const homeId = req.body.id;
-  Favourite.findOne({houseId: homeId}).then((fav)=>{
-  if(fav){
-    console.log("Already marked as favourite");
-  }
-  else{
-    fav = new Favourite({houseId: homeId});
-    fav.save().then((result)=>{
-      console.log("Fav added: ",result);
-    });
-  }
-  res.redirect("/favourites");
-}).catch((err)=>{
-  console.log("Error while marking favourite: ",err);
-});
-};
+  const fav = new Favourite(homeId);
+  fav.save().then((result)=>{
+    console.log('fav Added',result);
+  }).catch((error)=>{
+    console.log('Error: ',error);
+  }).finally(()=>{
+    res.redirect('/favourites');
+  })
+}
 
 exports.postRemoveFavourite = (req,res,next)=>{
   const homeId = req.params.homeId;
-  Favourite.findOneAndDelete({houseId: homeId}).then((result)=>{
+  Favourite.deleteById(homeId).then((result)=>{
     console.log('Fav removed: ',result);
   }).catch((error)=>{
     console.log('Error while removing: ',error);
