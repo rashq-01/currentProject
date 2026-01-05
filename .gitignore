@@ -14,6 +14,7 @@ Thumbs.db
 # Ignore Node.js dependencies
 node_js\5_Npm_and_Tools/node_modules
 **/node_modules/
+.env
 
 
 # Ignore Python bytecode files
